@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/blog/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="java编程思想-面向对象封装–&gt;继承–&gt;多态   java中使用变量遵循就近原则—-如果方法中有局部变量就是用，没有就去本类中找成员变量，如果也没有就会去父类中找，没有就会报错">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java 面向对象">
+<meta property="og:url" content="http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/s">
+<meta property="og:site_name" content="Wocean">
+<meta property="og:description" content="java编程思想-面向对象封装–&gt;继承–&gt;多态   java中使用变量遵循就近原则—-如果方法中有局部变量就是用，没有就去本类中找成员变量，如果也没有就会去父类中找，没有就会报错">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog/images/12.png">
+<meta property="og:image" content="http://example.com/blog/images/11.png">
+<meta property="article:published_time" content="2020-10-17T08:54:20.000Z">
+<meta property="article:modified_time" content="2020-10-20T08:04:41.349Z">
+<meta property="article:author" content="Wocean">
+<meta property="article:tag" content="Java,Linux,html,vue,js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog/images/12.png">
+
+<link rel="canonical" href="http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/s">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java 面向对象 | Wocean</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="Wocean" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Wocean</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">wocean</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/s">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Wocean">
+      <meta itemprop="description" content="wocean blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wocean">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java 面向对象
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-17 16:54:20" itemprop="dateCreated datePublished" datetime="2020-10-17T16:54:20+08:00">2020-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-20 16:04:41" itemprop="dateModified" datetime="2020-10-20T16:04:41+08:00">2020-10-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="java编程思想-面向对象"><a href="#java编程思想-面向对象" class="headerlink" title="java编程思想-面向对象"></a>java编程思想-面向对象</h3><p><font size="4"><strong>封装–&gt;继承–&gt;多态</strong></font>  </p>
+<p><font color="red">java中使用变量遵循就近原则—-如果方法中有局部变量就是用，没有就去本类中找成员变量，如果也没有就会去父类中找，没有就会报错</font>  </p>
+<a id="more"></a>  
+<ul>
+<li><p>类：一系列具有相同 <strong>属性</strong> 和 <strong>行为</strong> 的事物的统称，是一个抽象概念  </p>
+</li>
+<li><p>抽象：把一系列相关事物共同的属性和行为提取出来的过程  </p>
+</li>
+<li><p>对象：是该类事物的具体体现，是一种具体存在    </p>
+<p>  例：<br>  手机—-&gt;类<br>  手中的一部xxx手机—-&gt;对象</p>
+<h4 id="一-面向对象–封装"><a href="#一-面向对象–封装" class="headerlink" title="一.面向对象–封装"></a>一.面向对象–封装</h4></li>
+<li><p>Java中的封装：将一系列相关事物共同的属性和行为提取出来，放到一个类中，隐藏对象的属性和事项细节（private关键字），仅对外提供公共的访问方式（public 方法）；  </p>
+</li>
+<li><p>封装的关键：绝不能让类中的方法直接访问其他类的数据(属性)，程序仅通过对象的方法与对象的数据进行交互。</p>
+</li>
+</ul>
+<ul>
+<li><p>创建类<br>  类名；  成员变量=====属性   方法=====行为</p>
+</li>
+<li><p>创建对象<br>  类 对象名=new 类名();<br>  <strong>new关键字</strong>。通过new关键字创建对象，并在内存中开辟空间。 </p>
+</li>
+<li><p>使用对象<br>  对象名.属性；  对象名.方法名();</p>
+</li>
+<li><p>privat和this关键字（描述类和对象的关系）</p>
+<ul>
+<li><p>private:私有的，一种访问权限修饰符，用来修饰类的成员。被修饰的成员只能在本类中访问。  </p>
+</li>
+<li><p>private 数据类型 变量名  </p>
+</li>
+<li><p>private 返回值类型 方法名（）{}</p>
+</li>
+<li><p>this 表示类对象的引用，本质是一个对象<br>代码演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">        <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">            <span class="comment">//成员变量</span></span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">int</span> age = <span class="number">20</span>;</span><br><span class="line">            <span class="comment">//设置年龄</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">                age =a age;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//获取年龄</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> age;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> classs TestStudent &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">                Student stu = <span class="keyword">new</span> Student();</span><br><span class="line">                <span class="comment">//设置年龄</span></span><br><span class="line">                stu.setAge(<span class="number">50</span>);</span><br><span class="line">                <span class="comment">//获取年龄</span></span><br><span class="line">                System.out.println(stu.getAge());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//输出结果为：20 ； stu.setAge(50);只是为setAge方法中的局部变量age赋值为50；  </span></span><br><span class="line">        <span class="comment">//但因为局部变量与成员变量重名，所以未能为成员变量赋值为50，进而打印的值为20。</span></span><br><span class="line">        将setAge方法改为  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.age =a age;  <span class="comment">//this.age 表示成员变量age</span></span><br><span class="line">            &#125;</span><br><span class="line">        这时输出打印的结果为<span class="number">50</span>。</span><br><span class="line">    ```  </span><br><span class="line">    ![成员变量和局部变量](../images/<span class="number">7.</span>png)</span><br><span class="line">#### 二.JavaBean</span><br><span class="line">* 构造方法：构造器，用来创建对象的方法，构造方法的作用是初始化对象  </span><br></pre></td></tr></table></figure>
+<p>格式：<br>修饰符 构造方法名称(参数) {<br>  //方法体<br>}<br>要求：  </p>
+<pre><code>  1.方法名必须和类名相同(包括大小写)
+  2.没有返回值(但可以写return)
+  3.没有返回值类型(连void都不能写)  </code></pre>
+<p>注意事项   </p>
+<pre><code>  1.若未提供任何构造方法，系统会给出默认无参构造  
+  2.若以提供构造方法，系统不再提供无参构造  
+  3.构造方法可以重载</code></pre>
+<p>public class Student {<br>  public Student() {</p>
+<pre><code>  private String name;
+  //······</code></pre>
+<p>  }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">* JavaBean标准代码：</span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">    public class Student &#123;</span><br><span class="line">        &#x2F;&#x2F;成员变量，全部用票private修饰</span><br><span class="line">        private String name;</span><br><span class="line">        private int age;</span><br><span class="line">        &#x2F;&#x2F;构造方法：无参构造、有参构造</span><br><span class="line">        public Student() &#123;&#125;</span><br><span class="line"></span><br><span class="line">        public Student(String name,int age) &#123;</span><br><span class="line">            this.name &#x3D; name;</span><br><span class="line">            this.age &#x3D; age;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;公共的访问方式：setXXX(),getXXX()</span><br><span class="line">        public setName(String name)&#123;</span><br><span class="line">            this.name &#x3D; name;</span><br><span class="line">        &#125;</span><br><span class="line">        public getName()&#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line">        public setage(int age)&#123;</span><br><span class="line">            this.age &#x3D; age;</span><br><span class="line">        &#125;</span><br><span class="line">        public getage()&#123;</span><br><span class="line">            return age;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    public classs TestStudent &#123;</span><br><span class="line">        public static void main(String[] args) &#123;</span><br><span class="line">            &#x2F;&#x2F;通过无参创建对象</span><br><span class="line">            Student stu &#x3D; new Student();</span><br><span class="line">            stu.setAge(50);</span><br><span class="line">            stu.setName(&quot;是是是&quot;);</span><br><span class="line">            System.out.println(stu.getAge() + stu.getName());</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;通过全参创建的对象</span><br><span class="line">            Student stu &#x3D; new Student(&quot;seeef&quot;，50);</span><br><span class="line">            System.out.println(stu.getAge() + stu.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="三-繼承"><a href="#三-繼承" class="headerlink" title="三.繼承"></a>三.繼承</h4><p>1.概念<br>    继承就是子类继承父类的特征和行为，使得子类对象（实例）具有父类的实例域和方法，或子类从父类继承方法，使得子类具有父类相同的行为。<br>2.格式  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;在 Java 中通过 extends 关键字可以申明一个类是从另外一个类继承而来的，一般形式如下：   </span><br><span class="line"></span><br><span class="line">class 父类 &#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">class 子类 extends 父类 &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>3.优缺点  </p>
+<ul>
+<li>子类拥有父类非 private 的属性、方法。  </li>
+<li>子类可以拥有自己的属性和方法，即子类可以对父类进行扩展。  </li>
+<li>子类可以用自己的方式实现父类的方法。  </li>
+<li>Java 的继承是单继承，但是可以多重继承，单继承就是一个子类只能继承一个父类，多重继承就是，例如 A 类继承 B 类，B 类继承 C 类，所以按照关系就是 C 类是 B 类的父类，B 类是 A 类的父类，这是 Java 继承区别于 C++ 继承的一个特性。  </li>
+<li>缺点：高耦合性（继承的缺点，耦合度高就会造成代码之间的联系越紧密，代码独立性越差）。  </li>
+<li>缺点：打破了封装性 </li>
+</ul>
+<p>4.特点 </p>
+<ul>
+<li>成员变量、成员方法关系  <ul>
+<li>查找变量原则：就近原则  </li>
+<li>查找变量的顺序： 局部变量—&gt;成员变量—&gt;父类—&gt;更高的父类···Object  </li>
+<li><strong>super：</strong> 通过super关键字来实现对父类成员的访问，用来引用当前对象的父类(父类内存空间的标识)——-super.父类变量名  </li>
+<li>对象初始化顺序：先初始化父类内容，在初始化子类内容</li>
+</ul>
+</li>
+<li>构造方法    <ul>
+<li>构造方法不能继承  </li>
+<li>创建子类对象时，优先调用父类构造方法</li>
+<li>子类构造方法的第一行，隐含super(),用于调用父类的类默认无参构造  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">    SuperClass()&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;SuperClass()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// SubClass 类继承</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">SuperClass</span></span>&#123;</span><br><span class="line">    SubClass()&#123; </span><br><span class="line">        <span class="keyword">super</span>();<span class="comment">// 自动调用父类的无参数构造器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;SubClass&quot;</span>);</span><br><span class="line">    &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">    输出结果：</span><br><span class="line">    SuperClass()；</span><br><span class="line">    SubClass；</span><br><span class="line">    ``` </span><br><span class="line">    - 子类创建对象时，必须先初始化该对象的父类内容，若父类中不存在默认无参构造，需手动调用父类其他构造  </span><br><span class="line">    ```java</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SuperClass</span> </span>&#123;</span><br><span class="line">    SuperClass(String name)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;SuperClass&quot;</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// SubClass 类继承</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">SuperClass</span></span>&#123;</span><br><span class="line">    SubClass()&#123; </span><br><span class="line">        <span class="keyword">super</span>(<span class="string">&quot;父类&quot;</span>);<span class="comment">// 自动调用父类的无参数构造器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;SubClass&quot;</span>);</span><br><span class="line">    &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">    输出结果：</span><br><span class="line">    SuperClass父类；</span><br><span class="line">    SubClass；</span><br><span class="line">    ```   </span><br><span class="line">    ![继承关系成员变量内存图](../images/<span class="number">8.</span>png)</span><br><span class="line"><span class="number">5.</span>方法重写  </span><br><span class="line">&lt;font color=&quot;red&quot;&gt;**访问权限修饰符**&lt;/font&gt;  </span><br><span class="line">等级(从小到大)： <span class="keyword">private</span>、默认什么都不写、<span class="keyword">protected</span>、<span class="keyword">public</span>  </span><br><span class="line"></span><br><span class="line">![访问权限修饰符](../images/<span class="number">9.</span>png)   </span><br><span class="line">||| </span><br><span class="line">|----|----|</span><br><span class="line">|<span class="keyword">private</span>:|强调本类使用|</span><br><span class="line">|默认：|强调本包使用|</span><br><span class="line">|<span class="keyword">protected</span>：|强调子类使用，不管子类与父类是否在一个包内|</span><br><span class="line">|<span class="keyword">public</span>：|所有都可以使用|</span><br><span class="line"></span><br><span class="line">- 子类中出现和父类方法定义相同的方法的现象--方法名、参数列表、返回值类型都相同  </span><br><span class="line">- 父类私有方法无法重写；子类方法访问权限不能小于父类方法()  </span><br><span class="line">- 使用场景：扩展父类功能；父类功能过时，重新实现父类功能  </span><br><span class="line"> </span><br><span class="line"><span class="number">6.</span>方法重写和方法重载  </span><br><span class="line">||重载(Overload)|重写(Override)| </span><br><span class="line">|----|----|----|</span><br><span class="line">|方法|相同|相同|</span><br><span class="line">|参数列表|不同(个数或对应位置类型)|相同|</span><br><span class="line">|返回值类型|无关|相同|</span><br><span class="line">|修饰符|无关|访问权限不小于被重写方法|</span><br><span class="line">|定义位置|同一个类|子父类中|  </span><br><span class="line"></span><br><span class="line">|||</span><br><span class="line">|----|----|</span><br><span class="line">|方法重载：是指同一个类中出现两个或两个以上的同名方法时，而这些方法的参数列表不同，并且与返回值类型、修饰符无关 |方法重写：指的是子类出现和父类一模一样的方法，要求返回值的类型必须一致|  </span><br><span class="line">#### 四.多态</span><br><span class="line">##### 基本概念  </span><br><span class="line">    <span class="number">1.</span>多态：多种状态，同一对象在不同情况下表现出不同的我状态和行为(例;水)  </span><br><span class="line">    <span class="number">2.</span>好处：  </span><br><span class="line">        可维护性，只需要维护父类代码，提高了代码的复用性，降低了维护程序的工作量  </span><br><span class="line">        可扩展性，把不同的子类对象都当做父类看待，屏蔽了不同子类对象间的差异，做出通用的代码，以适应不同的需求，实现了向后兼容    </span><br><span class="line">    <span class="number">3.</span>弊端  </span><br><span class="line">        父类不能使用子类特有成员(但可以通过类型转换实现) </span><br><span class="line">**实现步骤：**  </span><br><span class="line">- 要有继承(或实现)关系  </span><br><span class="line">- 要有方法重写  </span><br><span class="line">- 父类引用指向子类对象(is a关系)  </span><br><span class="line">    * Animal a = <span class="keyword">new</span> Dog();<span class="comment">//Animal父类引用指向子类对象  </span></span><br><span class="line">- 成员方法  </span><br></pre></td></tr></table></figure>
+Animal a = new Dog()<br>//多态调用成员方法编译看左(Animal 父类中有没有这个成员)运行看右(运行子类中成员)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    ![父类引用指向子类对象的内存图](..&#x2F;images&#x2F;10.png)</span><br><span class="line">- 成员变量  </span><br><span class="line">    &#96;&#96;&#96;java</span><br><span class="line">    public class Animal &#123;</span><br><span class="line">        String name &#x3D; &quot;Animal&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public class Dpg extends Animnal &#123;</span><br><span class="line">        String name &#x3D; &quot;Dog&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public class Test &#123;</span><br><span class="line">        public static void main(STring[] args) &#123;</span><br><span class="line">            &#x2F;&#x2F;多态关系中，成员变量是不涉及重写的</span><br><span class="line">            &#x2F;*多态关系中，使用成员变量遵循“编译看左，运行看左”</span><br><span class="line">            编译看左：意思是编译期间会看左边的类型有没有这个成员变量，没有就报错</span><br><span class="line">            运行看左：意思是在运行期间使用的是左边的类型的这个成员变量</span><br><span class="line">            *&#x2F;</span><br><span class="line">            Animal a &#x3D; new Dog();</span><br><span class="line">            System.out.println(a.name);</span><br><span class="line">            &#x2F;&#x2F;结果是Animal</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;通过普通方式创建对象</span><br><span class="line">            Dog d &#x3D; new Dog();</span><br><span class="line">            System.out.println(d.name);</span><br><span class="line">            &#x2F;&#x2F;结果是Dog</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<img src="../images/12.png" alt="多态关系中成员变量的内存图"></li>
+</ul>
+</li>
+<li>*实现场景**  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//test Dog</span></span><br><span class="line">        Dog d = <span class="keyword">new</span> Dog();</span><br><span class="line">        d.setName(<span class="string">&quot;dog&quot;</span>);</span><br><span class="line">        show(d);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//test cat</span></span><br><span class="line">        Cat c = <span class="keyword">new</span> Cat();</span><br><span class="line">        c.setName(<span class="string">&quot;cat&quot;</span>);</span><br><span class="line">        show(c);</span><br><span class="line">  &#125;  </span><br><span class="line">    <span class="comment">//多态的使用场景，父类型可以作为形参的数据类型，这样可以接收其任意的子类对象        </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Animal a)</span>  </span>&#123;</span><br><span class="line">      a.eat();</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Animal 父类----------------------------------------------- </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">         <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;吃饭&quot;</span>);</span><br><span class="line">    &#125;; </span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//--------------------------------------------  </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        System.out.println(getName()+<span class="string">&quot;吃鱼&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//-------------------------------------------------  </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        System.out.println(getName()+<span class="string">&quot;吃骨头&quot;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="../images/11.png" alt="多态的效果内存图"></li>
+</ul>
+<h5 id="实现方式-重点"><a href="#实现方式-重点" class="headerlink" title="实现方式(重点)"></a>实现方式(重点)</h5><p><strong>抽象类</strong>：包含抽象方法的类，用abstract修饰。</p>
+<p><strong>抽象方法</strong>：只有方法说明，没有方法体的方法。用abstract修饰(当需要定义一个方法，却不明确方法的具体实现时，可以定义抽象方法，具体实现由子类定义)  </p>
+<h5 id="一、抽象类"><a href="#一、抽象类" class="headerlink" title="一、抽象类"></a>一、抽象类</h5><p>1.特点  </p>
+<ul>
+<li>修饰符abstract  <code>public abstract class Animal&#123;&#125;······</code></li>
+<li>抽象类不能被实例化，只能创建子类对象</li>
+<li>抽象子类的两个选择：重写父类所有抽象方法、定义成抽象类 </li>
+</ul>
+<p>2.成员特点  </p>
+<ul>
+<li>可以有普通的成员变量、也可以有成员常量(final)</li>
+<li>可以有普通方法，抽象类中不一定包含抽象方法，但是有抽象方法的类必定是抽象类。  </li>
+<li>构造方法，类方法（用 static 修饰的方法）不能声明为抽象方法。</li>
+<li>像普通类一样有构造方法，且可以重载  <h5 id="二、接口"><a href="#二、接口" class="headerlink" title="二、接口"></a>二、接口</h5>1.接口  </li>
+<li>定义接口：关键字interface；interface 接口名 {}；  </li>
+<li>类实现接口， class 类名 implements 接口名；  </li>
+<li>接口不能用于实例化对象。接口没有构造方法。 接口中所有的方法必须是抽象方法。</li>
+<li>接口不能没有成员变量，只有成员常量，因为接口的所有变量都有默认修饰符 “pulic static final “。接口不是被类继承了，而是要被类实现。接口支持多继承。   </li>
+<li>jdk7及以前，只能定义抽象方法，原因是所有方法默认修饰符:public abstract</li>
+<li>jdk8yihou ，可以有带方法体的方法了，静态方法static修饰，非静态有default修饰</li>
+<li>jdk9以后 ，可以有私有方法直接写即可  private ···<br>2.final关键字  </li>
+<li>用于修饰类、方法和变量</li>
+<li>final修饰的类不能被继承</li>
+<li>final修饰的方法不能被重写，不能与abstract共存</li>
+<li>修饰变量：最终变量，即常量，只能赋值一次    </li>
+</ul>
+<p>3.static关键字  </p>
+<ul>
+<li>用于修饰类的成员</li>
+<li>成员变量：类变量， 被本类所有对象共享</li>
+<li>成员方法：类方法 ，静态方法中没有this关键字，所以访问静态成员</li>
+<li>静态方法使用场景：只需要访问静态成员、不需要访问对象状态，所需参数都由参数列表显示提供<br>注意事项：随意修改静态变量的值是有风险的，为了降低风险，可以同时使用public final关键字修饰，即公有静态常量。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/s" rel="prev" title="java方法重载">
+      <i class="fa fa-chevron-left"></i> java方法重载
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-text">java编程思想-面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E2%80%93%E5%B0%81%E8%A3%85"><span class="nav-text">一.面向对象–封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89-%E7%B9%BC%E6%89%BF"><span class="nav-text">三.繼承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F-%E9%87%8D%E7%82%B9"><span class="nav-text">实现方式(重点)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-text">一、抽象类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8E%A5%E5%8F%A3"><span class="nav-text">二、接口</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wocean"
+      src="/blog/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Wocean</p>
+  <div class="site-description" itemprop="description">wocean blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yourname@gmail.com" title="E-Mail → mailto:yourname@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/yourname" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://plus.google.com/yourname" title="Google → https:&#x2F;&#x2F;plus.google.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-google fa-fw"></i>Google</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wocean</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/muse.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

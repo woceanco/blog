@@ -18,8 +18,8 @@
   
   <entry>
     <title>java 面向对象</title>
-    <link href="http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/s"/>
-    <id>http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/s</id>
+    <link href="http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    <id>http://example.com/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</id>
     <published>2020-10-17T08:54:20.000Z</published>
     <updated>2020-10-20T08:04:41.349Z</updated>
     
@@ -36,8 +36,8 @@
   
   <entry>
     <title>java方法重载</title>
-    <link href="http://example.com/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/s"/>
-    <id>http://example.com/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/s</id>
+    <link href="http://example.com/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/"/>
+    <id>http://example.com/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/</id>
     <published>2020-10-17T08:25:44.000Z</published>
     <updated>2020-10-20T07:56:32.480Z</updated>
     
@@ -59,8 +59,8 @@
   
   <entry>
     <title>Java编程规范1</title>
-    <link href="http://example.com/blog/Java%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%831/s"/>
-    <id>http://example.com/blog/Java%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%831/s</id>
+    <link href="http://example.com/blog/Java%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%831/"/>
+    <id>http://example.com/blog/Java%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%831/</id>
     <published>2020-10-15T15:12:36.000Z</published>
     <updated>2020-10-20T07:57:31.918Z</updated>
     

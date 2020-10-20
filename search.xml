@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java编程规范1</title>
+    <url>/blog/Java%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%831/</url>
+    <content><![CDATA[<h5 id="1-大括号成对、对齐"><a href="#1-大括号成对、对齐" class="headerlink" title="1.大括号成对、对齐"></a>1.大括号成对、对齐</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;&#x2F;&#x2F;与main方法所在行的首字母对齐</span><br><span class="line"></span><br><span class="line">&#125;&#x2F;&#x2F;与HelloWorld类所在行的首字母对齐</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="2-左大括号前有一个空格"><a href="#2-左大括号前有一个空格" class="headerlink" title="2.左大括号前有一个空格"></a>2.左大括号前有一个空格</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-代码缩进"><a href="#3-代码缩进" class="headerlink" title="3.代码缩进"></a>3.代码缩进</h5><p>第一行有大括号，所以第二行缩进</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="4-方法和程序块之间空行"><a href="#4-方法和程序块之间空行" class="headerlink" title="4.方法和程序块之间空行"></a>4.方法和程序块之间空行</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">    *空行更显美观</span><br><span class="line">    *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-并排语句加空格"><a href="#5-并排语句加空格" class="headerlink" title="5.并排语句加空格"></a>5.并排语句加空格</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if () &#123;</span><br><span class="line">    for (int i &#x3D; 0; i &lt; 10; i++)&#x2F;&#x2F;括号内并排语句，分号后加空格</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="6-运算符两侧加空格"><a href="#6-运算符两侧加空格" class="headerlink" title="6.运算符两侧加空格"></a>6.运算符两侧加空格</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if () &#123;</span><br><span class="line">    for (int i &#x3D; 0; i &lt; 10; i++)&#x2F;&#x2F;&quot;&#x3D;、&lt;&quot;运算符两侧加空格</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java 面向对象</title>
-    <url>/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/s</url>
+    <url>/blog/java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</url>
     <content><![CDATA[<h3 id="java编程思想-面向对象"><a href="#java编程思想-面向对象" class="headerlink" title="java编程思想-面向对象"></a>java编程思想-面向对象</h3><p><font size="4"><strong>封装–&gt;继承–&gt;多态</strong></font>  </p>
 <p><font color="red">java中使用变量遵循就近原则—-如果方法中有局部变量就是用，没有就去本类中找成员变量，如果也没有就会去父类中找，没有就会报错</font>  </p>
 <a id="more"></a>  
@@ -121,23 +136,8 @@ Animal a = new Dog()<br>//多态调用成员方法编译看左(Animal 父类中�
 ]]></content>
   </entry>
   <entry>
-    <title>Java编程规范1</title>
-    <url>/blog/Java%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%831/s</url>
-    <content><![CDATA[<h5 id="1-大括号成对、对齐"><a href="#1-大括号成对、对齐" class="headerlink" title="1.大括号成对、对齐"></a>1.大括号成对、对齐</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;&#x2F;&#x2F;与main方法所在行的首字母对齐</span><br><span class="line"></span><br><span class="line">&#125;&#x2F;&#x2F;与HelloWorld类所在行的首字母对齐</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h5 id="2-左大括号前有一个空格"><a href="#2-左大括号前有一个空格" class="headerlink" title="2.左大括号前有一个空格"></a>2.左大括号前有一个空格</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="3-代码缩进"><a href="#3-代码缩进" class="headerlink" title="3.代码缩进"></a>3.代码缩进</h5><p>第一行有大括号，所以第二行缩进</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="4-方法和程序块之间空行"><a href="#4-方法和程序块之间空行" class="headerlink" title="4.方法和程序块之间空行"></a>4.方法和程序块之间空行</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;HelloWorld&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">    *空行更显美观</span><br><span class="line">    *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="5-并排语句加空格"><a href="#5-并排语句加空格" class="headerlink" title="5.并排语句加空格"></a>5.并排语句加空格</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if () &#123;</span><br><span class="line">    for (int i &#x3D; 0; i &lt; 10; i++)&#x2F;&#x2F;括号内并排语句，分号后加空格</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="6-运算符两侧加空格"><a href="#6-运算符两侧加空格" class="headerlink" title="6.运算符两侧加空格"></a>6.运算符两侧加空格</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if () &#123;</span><br><span class="line">    for (int i &#x3D; 0; i &lt; 10; i++)&#x2F;&#x2F;&quot;&#x3D;、&lt;&quot;运算符两侧加空格</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java方法重载</title>
-    <url>/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/s</url>
+    <url>/blog/java%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/</url>
     <content><![CDATA[<p><strong>方法重载：</strong> 在同一个类中的多个方法，它们的方法名相同，参数列表不同，这样的情况，称为方法重载。方法重载与返回值类型无关。</p>
 <pre><code>参数列表不同:  
     - 参数个数不同
